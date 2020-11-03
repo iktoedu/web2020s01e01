@@ -41,8 +41,22 @@ table {
     }
 }
 
+.menu-trigger {
+    float: right;
+    cursor: pointer;
+}
+
 .menu {
     padding: 0;
+    display: none;
+
+    &.menu-is-open {
+        display: block;
+    }
+
+    @include breakpoint("desktop") {
+        display: block;
+    }
 
     li {
         overflow: hidden;
