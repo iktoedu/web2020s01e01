@@ -9,7 +9,7 @@ const gulp = require('gulp'),
     del = require('del');
 
 let options = {
-    sass_path: __dirname + '/sass/',
+    sass_path: __dirname + '/sources/sass/',
     css_path: __dirname + '/css/'
 };
 
