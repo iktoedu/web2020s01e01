@@ -8,6 +8,9 @@ const gulp = require('gulp'),
     rename = require('gulp-rename'),
     del = require('del');
 
+const webpack = require('webpack'),
+    webpack_config = require('./webpack.config.js');
+
 let options = {
     sass_path: __dirname + '/sources/sass/',
     css_path: __dirname + '/css/'
@@ -21,6 +24,11 @@ let scssFiles = [
 gulp.task('clean:css', () => del([
         options.css_path + '**/*.css',
         options.css_path + '**/*.map'
+    ], {force: true})
+);
+
+gulp.task('clean:js', () => del([
+        webpack_config.output.path + '/**/*.js',
     ], {force: true})
 );
 
@@ -44,4 +52,16 @@ gulp.task('sass', gulp.series('clean:css', () => gulp.src(scssFiles)
     .pipe(gulp.dest(options.css_path))
 ));
 
-gulp.task('default', gulp.series('sass'));
+gulp.task('webpack', gulp.series('clean:js', () => new Promise((resolve, reject) => {
+    webpack(webpack_config, (err, stats) => {
+        if (err) {
+            return reject(err);
+        }
+        if (stats.hasErrors()) {
+            return reject(new Error(stats.compilation.errors.join('\n')));
+        }
+        resolve();
+    });
+})));
+
+gulp.task('default', gulp.series('sass', 'webpack'));
