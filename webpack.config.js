@@ -12,6 +12,7 @@ module.exports = {
     resolve: {
         modules: [
             __dirname + '/sources/js/modules',
+            __dirname + '/node_modules',
         ]
     }
 };

@@ -31,7 +31,8 @@ gulp.task('sass', gulp.series('clean:css', () => gulp.src(scssFiles)
         outputStyle: 'develop',
         sourceMap: true,
         includePaths: [
-            __dirname + '/node_modules/normalize-scss/sass'
+            __dirname + '/node_modules/normalize-scss/sass',
+            __dirname + '/node_modules/noty/src',
         ]
     }))
     .pipe(autoprefixer())
