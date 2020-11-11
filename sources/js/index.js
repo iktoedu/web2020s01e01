@@ -9,4 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     new Noty({
         text: 'Welcome to this completely useless website!',
     }).show();
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', {scope: '/'})
+            .then(() => {
+                console.log('SW registered');
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 });

@@ -4,6 +4,7 @@ module.exports = {
     mode: 'development',
     entry: {
         main: __dirname + '/sources/js/index.js',
+        sw: __dirname + '/sources/js/sw.js',
     },
     output: {
         path: __dirname + '/js',
